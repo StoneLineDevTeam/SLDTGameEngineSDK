@@ -57,7 +57,10 @@ public class ProjectManager {
 
     private static String[][] folders = {{"backgrounds", "mainBG.png", "sldtBG.png"}, {"buttons", "next.png", "normal.png", "round.png", "stop.png"}, {"components", "consoleScreen_scrollDown.png", "consoleScreen_scrollUp.png", "progressBar.png"}, {"fonts", "normal.png"}, {"message", "button.png", "confirmLogo.png", "criticalLogo.png", "dialog.png", "errorLogo.png", "infoLogo.png", "warningLogo.png"}, {"renderEngine", "missingTex.png"}, {"renderEngine/gradients", "left.png", "right.png", "top.png", "bottom.png"}};
     public static void genereateProjectContentFolder(String prjDir){
-        final File jarFile = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        File f20000000 = new File(prjDir + File.separator + "materials" + File.separator);
+        if (!f20000000.exists()){
+            f20000000.mkdirs();
+        }
         for (String[] files : folders) {
             String folderName = files[0];
             for (int i = 1 ; i < files.length; i++) {
@@ -73,7 +76,7 @@ public class ProjectManager {
                             continue;
                         }
                     }
-                    File f1 = new File(prjDir + File.separator + asset);
+                    File f1 = new File(prjDir + File.separator + "materials" + File.separator + asset);
                     writeAppResourceToFile(assetInArchive, f1);
                 } catch (IOException e) {
                     Main.log.warning("Unable to create default asset " + assetInArchive + " : " + e.getMessage());

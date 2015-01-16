@@ -52,7 +52,7 @@ public class Main {
         File f = null;
         for (String s : args){
             String[] s1 = s.split("=");
-            if (s1[0].equals("-file")){
+            if (s1[0].equals("-project")){
                 f = new File(s1[1]);
             } else if (s1[0].equals("-console")){
                 console = Boolean.parseBoolean(s1[1]);

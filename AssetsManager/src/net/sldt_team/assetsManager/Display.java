@@ -1,7 +1,6 @@
 package net.sldt_team.assetsManager;
 
 import net.sldt_team.assetsManager.compiler.ZipFileCompiler;
-import net.sldt_team.assetsManager.compiler.ZipFileUtilities;
 import net.sldt_team.assetsManager.utils.*;
 
 import javax.swing.*;
@@ -22,7 +21,7 @@ public class Display extends JFrame {
     private JTree theTree;
     private FileSystemModel treeModel;
     private JScrollPane thePane;
-    private TreeImageDisplayPanel thePanel;
+    private TreeFileDisplayPanel thePanel;
 
     public String prjName;
     public String prjDir;
@@ -128,8 +127,8 @@ public class Display extends JFrame {
         }
     }
 
-    public TreeImageDisplayPanel getMainPanel(){
-        thePanel = new TreeImageDisplayPanel(this);
+    public TreeFileDisplayPanel getMainPanel(){
+        thePanel = new TreeFileDisplayPanel(this);
         thePanel.setSize(712, getHeight() - 70);
         thePanel.setLayout(new FlowLayout());
         thePanel.setLocation(300, 10);

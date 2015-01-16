@@ -48,18 +48,14 @@ public class ZipFileCompiler {
         for (File f : files) {
             if (!f.isDirectory()) {
                 int code = checkAndAddFile(list, f);
-                if (code == 0) {
-                    Main.log.severe("The compiler has returned error code 0 : invalid_argument_#size");
-                    return;
-                } else if (code == 1) {
-                    Main.log.severe("The compiler has returned error code 1 : invalid_argument_#extention");
-                    return;
-                } else if (code == 2) {
-                    Main.log.severe("The compiler has returned error code 2 : unknown_error");
-                    return;
-                } else if (code == 3) {
-                    Main.log.severe("The compiler has returned error code 3 : file_load_failure");
-                    return;
+                switch(code) {
+                    case 0:
+                        Main.log.severe("The compiler has returned error code 0 : unknown_error");
+                        return;
+
+                    case 1:
+                        Main.log.severe("The compiler has returned error code 1 : file_invalid_or_corrupted");
+                        return;
                 }
             } else {
                 addDirectoryToCompileList(f, list);
@@ -75,22 +71,17 @@ public class ZipFileCompiler {
     }
 
     private static int checkAndAddFile(List<File> list, File f) {
-        if (Utilities.getFileExtention(f) != null && Utilities.getFileExtention(f).equalsIgnoreCase("PNG")) {
+        if (Utilities.getFileExtention(f) != null) {
             try {
-                BufferedImage image = ImageIO.read(f);
-                int w = image.getWidth(null);
-                int h = image.getHeight(null);
-                if (isPowerOfTwo(w) && isPowerOfTwo(h)) {
-                    list.add(f);
-                    return -1;
-                } else {
-                    return 0;
-                }
+                FileInputStream input = new FileInputStream(f);
+                input.close();
+                list.add(f);
+                return -1;
             } catch (IOException e) {
-                return 3;
+                return 1;
             }
         } else {
-            return 1;
+            return 0;
         }
     }
 
@@ -104,18 +95,14 @@ public class ZipFileCompiler {
         for (File f : files) {
             if (!f.isDirectory()) {
                 int code = checkAndAddFile(preparedFiles, f);
-                if (code == 0) {
-                    Main.log.severe("The compiler has returned error code 0 : invalid_argument_#size");
-                    return;
-                } else if (code == 1) {
-                    Main.log.severe("The compiler has returned error code 1 : invalid_argument_#extention");
-                    return;
-                } else if (code == 2) {
-                    Main.log.severe("The compiler has returned error code 2 : unknown_error");
-                    return;
-                } else if (code == 3) {
-                    Main.log.severe("The compiler has returned error code 3 : file_load_failure");
-                    return;
+                switch(code) {
+                    case 0:
+                        Main.log.severe("The compiler has returned error code 0 : unknown_error");
+                        return;
+
+                    case 1:
+                        Main.log.severe("The compiler has returned error code 1 : file_invalid_or_corrupted");
+                        return;
                 }
             } else {
                 addDirectoryToCompileList(f, preparedFiles);
@@ -146,18 +133,14 @@ public class ZipFileCompiler {
         for (File f : files) {
             if (!f.isDirectory()) {
                 int code = checkAndAddFile(preparedFiles, f);
-                if (code == 0) {
-                    Main.log.severe("The compiler has returned error code 0 : invalid_argument_#size");
-                    return;
-                } else if (code == 1) {
-                    Main.log.severe("The compiler has returned error code 1 : invalid_argument_#extention");
-                    return;
-                } else if (code == 2) {
-                    Main.log.severe("The compiler has returned error code 2 : unknown_error");
-                    return;
-                } else if (code == 3) {
-                    Main.log.severe("The compiler has returned error code 3 : file_load_failure");
-                    return;
+                switch(code) {
+                    case 0:
+                        Main.log.severe("The compiler has returned error code 0 : unknown_error");
+                        return;
+
+                    case 1:
+                        Main.log.severe("The compiler has returned error code 1 : file_invalid_or_corrupted");
+                        return;
                 }
             } else {
                 addDirectoryToCompileList(f, preparedFiles);
@@ -188,18 +171,14 @@ public class ZipFileCompiler {
         for (File f : files) {
             if (!f.isDirectory()) {
                 int code = checkAndAddFile(preparedFiles, f);
-                if (code == 0) {
-                    Main.log.severe("The compiler has returned error code 0 : invalid_argument_#size");
-                    return;
-                } else if (code == 1) {
-                    Main.log.severe("The compiler has returned error code 1 : invalid_argument_#extention");
-                    return;
-                } else if (code == 2) {
-                    Main.log.severe("The compiler has returned error code 2 : unknown_error");
-                    return;
-                } else if (code == 3) {
-                    Main.log.severe("The compiler has returned error code 3 : file_load_failure");
-                    return;
+                switch(code) {
+                    case 0:
+                        Main.log.severe("The compiler has returned error code 0 : unknown_error");
+                        return;
+
+                    case 1:
+                        Main.log.severe("The compiler has returned error code 1 : file_invalid_or_corrupted");
+                        return;
                 }
             } else {
                 addDirectoryToCompileList(f, preparedFiles);

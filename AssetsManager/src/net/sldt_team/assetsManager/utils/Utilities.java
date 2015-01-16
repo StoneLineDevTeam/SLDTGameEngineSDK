@@ -63,9 +63,7 @@ public class Utilities {
                 if (getFileExtention(file) == null){
                     continue;
                 }
-                if (getFileExtention(file).equalsIgnoreCase("PNG")){
-                    fileList.add(file);
-                }
+                fileList.add(file);
             }
         }
         return fileList;

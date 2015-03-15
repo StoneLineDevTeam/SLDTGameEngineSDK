@@ -3,6 +3,7 @@ package net.sldt_team.assetsManager;
 import net.sldt_team.assetsManager.compiler.ZipFileCompiler;
 import net.sldt_team.assetsManager.utils.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.TreeSelectionModel;
@@ -35,6 +36,12 @@ public class Display extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);
         setLayout(new BorderLayout());
+
+        try {
+            setIconImage(ImageIO.read(Display.class.getResourceAsStream("AssetsManager.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         resetTree(null, null);
 

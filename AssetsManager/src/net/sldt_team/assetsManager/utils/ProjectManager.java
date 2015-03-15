@@ -57,9 +57,17 @@ public class ProjectManager {
 
     private static String[][] folders = {{"backgrounds", "mainBG.png", "sldtBG.png"}, {"buttons", "next.png", "normal.png", "round.png", "stop.png"}, {"components", "consoleScreen_scrollDown.png", "consoleScreen_scrollUp.png", "progressBar.png"}, {"fonts", "normal.png"}, {"message", "button.png", "confirmLogo.png", "criticalLogo.png", "dialog.png", "errorLogo.png", "infoLogo.png", "warningLogo.png"}, {"renderEngine", "missingTex.png"}, {"renderEngine/gradients", "left.png", "right.png", "top.png", "bottom.png"}};
     public static void genereateProjectContentFolder(String prjDir){
-        File f20000000 = new File(prjDir + File.separator + "materials" + File.separator);
+        File f20000000 = new File(prjDir + File.separator);
+        File f20000001 = new File(prjDir + File.separator + "materials" + File.separator);
         if (!f20000000.exists()){
-            f20000000.mkdirs();
+            if (!f20000000.mkdirs()) {
+                Main.log.warning("Root folder generation failure !");
+            }
+        }
+        if (!f20000001.exists()){
+            if (!f20000001.mkdirs()) {
+                Main.log.warning("Root folder generation failure !");
+            }
         }
         for (String[] files : folders) {
             String folderName = files[0];
@@ -69,7 +77,7 @@ public class ProjectManager {
                 String asset = folderName.replace("/", File.separator) + File.separator + fileName;
                 String assetDir = folderName + File.separator;
                 try {
-                    File f = new File(prjDir + File.separator + assetDir);
+                    File f = new File(prjDir + File.separator + "materials" + File.separator + assetDir);
                     if (!f.exists()){
                         if (!f.mkdirs()) {
                             Main.log.warning("Folder creation failed !");

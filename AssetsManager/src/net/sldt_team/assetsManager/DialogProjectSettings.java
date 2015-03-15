@@ -25,24 +25,36 @@ public class DialogProjectSettings extends JDialog{
         setPreferredSize(new Dimension(512, 178));
         setMinimumSize(new Dimension(512, 178));
 
+        JPanel main = new JPanel();
+        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+
+        JPanel p = new JPanel();
+        p.setLayout(new FlowLayout());
         final JLabel prjNameLabel = new JLabel("Project name : ");
-        add(prjNameLabel);
+        p.add(prjNameLabel);
         final JTextField name = new JTextField(35);
         name.setText(parent.prjName);
-        add(name);
+        p.add(name);
 
+        main.add(p);
+
+        JPanel p1 = new JPanel();
+        p1.setLayout(new FlowLayout());
         final JLabel prjGameLabel = new JLabel("Game name : ");
-        add(prjGameLabel);
+        p1.add(prjGameLabel);
         final JTextField gameName = new JTextField(35);
         gameName.setText(parent.prjGameName);
-        add(gameName);
+        p1.add(gameName);
 
+        main.add(p1);
+
+        JPanel p2 = new JPanel();
+        p2.setLayout(new FlowLayout());
         final JLabel prjCompLabel = new JLabel("Project compile dir : ");
-        add(prjCompLabel);
+        p2.add(prjCompLabel);
         final JTextField compDir = new JTextField(30);
         compDir.setText(parent.prjCompileDir);
-        add(compDir);
-
+        p2.add(compDir);
         final JButton setCompileDirectory = new JButton("...");
         setCompileDirectory.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,8 +73,12 @@ public class DialogProjectSettings extends JDialog{
                 }
             }
         });
-        add(setCompileDirectory);
+        p2.add(setCompileDirectory);
 
+        main.add(p2);
+
+        JPanel p3 = new JPanel();
+        p3.setLayout(new FlowLayout());
         JButton ok = new JButton("  Ok  ");
         ok.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +90,10 @@ public class DialogProjectSettings extends JDialog{
 
                     boolean b = display.projectFile.getParentFile().renameTo(newRacine);
                     Main.log.warning("User requested rename project directory ; exit code is : " + b);
+
+                    if (newPrjFile.exists()){
+                        newPrjFile.delete();
+                    }
 
                     Map<String, String> prjInfos = new HashMap<String, String>();
                     prjInfos.put("NAME", display.prjName);
@@ -87,7 +107,18 @@ public class DialogProjectSettings extends JDialog{
                 dispose();
             }
         });
-        add(ok);
+        p3.add(ok);
+        JButton cancel = new JButton("  Cancel  ");
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        p3.add(cancel);
+
+        main.add(p3);
+
+        add(main);
 
         setResizable(false);
     }
